@@ -17,6 +17,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.frame, new ManualFragment()).commit();
+
         BottomNavigationView navigationView = findViewById(R.id.navi);
         navigationView.setOnNavigationItemSelectedListener(
                 new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -50,12 +54,12 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean loadFragment(Fragment fragment, int newPosition) {
         if(fragment != null) {
-            if(newPosition == 0) {
-                getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.frame, fragment).commit();
-
-            }
+//            if(newPosition == 0) {
+//                getSupportFragmentManager()
+//                        .beginTransaction()
+//                        .replace(R.id.frame, fragment).commit();
+//
+//            }
             if(oldposn > newPosition) {
                 getSupportFragmentManager()
                         .beginTransaction()
