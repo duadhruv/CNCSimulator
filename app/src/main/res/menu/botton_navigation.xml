@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/manual"
+        android:icon="@drawable/manual_icon"
+        android:title="Manual"></item>
+    <item
+        android:id="@+id/programmed"
+        android:icon="@drawable/program_icon"
+        android:title="Programmed"></item>
+    <item
+        android:id="@+id/countinous"
+        android:icon="@drawable/countinous_icon"
+        android:title="Countinous"></item>
+
+</menu>
