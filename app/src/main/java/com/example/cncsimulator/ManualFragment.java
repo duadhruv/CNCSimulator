@@ -1,5 +1,6 @@
 package com.example.cncsimulator;
 
+import android.app.Activity;
 import android.icu.util.ValueIterator;
 import android.os.Bundle;
 import android.os.Handler;
@@ -32,7 +33,7 @@ public class ManualFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_manual,container,false);
 
-
+        final Activity main = ((MainActivity)getActivity());
         jobstart =  view.findViewById(R.id.jobstart);
         jobend = view.findViewById(R.id.jobend);
         timetxt=view.findViewById(R.id.time);
@@ -57,10 +58,12 @@ public class ManualFragment extends Fragment {
         startcycle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ((MainActivity) main).startcycle();
                 stopcycle.setEnabled(true);
                 startcycle.setEnabled(false);
                 cycleticker.reset();
                 cycleticker.start();
+                jobend.setEnabled(false);
 
             }
         });
@@ -69,11 +72,13 @@ public class ManualFragment extends Fragment {
         stopcycle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ((MainActivity) main).endcycle();
                 cyclecount++;
                 count.setText(String.valueOf(cyclecount));
                 stopcycle.setEnabled(false);
                 startcycle.setEnabled(true);
                 cycleticker.stop();
+                jobend.setEnabled(true);
 
 
 
@@ -90,11 +95,15 @@ public class ManualFragment extends Fragment {
         jobstart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ((MainActivity) main).startjob();
                 jobstart.setEnabled(false);
                 jobend.setEnabled(true);
                 startcycle.setVisibility(View.VISIBLE);
                 stopcycle.setVisibility(View.VISIBLE);
                 startcycle.setEnabled(true);
+                cyclecount=0;
+                count.setText(String.valueOf(cyclecount));
+
 
                 manualLayout.setBackgroundResource(R.color.startColor);
                 Animation fadeout = AnimationUtils.loadAnimation(getContext(), R.anim.fadeout);
@@ -142,12 +151,14 @@ public class ManualFragment extends Fragment {
         jobend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ((MainActivity) main).endjob();
                 jobend.setEnabled(false);
                 jobstart.setEnabled(true);
                 startcycle.setEnabled(false);
                 stopcycle.setEnabled(false);
                 startcycle.setVisibility(View.GONE);
                 stopcycle.setVisibility(View.GONE);
+                cycleticker.reset();
                 manualLayout.setBackgroundResource(R.color.stopColor);
                 Animation fadeout = AnimationUtils.loadAnimation(getContext(), R.anim.fadeout);
                 Animation fadein = AnimationUtils.loadAnimation(getContext(), R.anim.fadein);
@@ -202,6 +213,16 @@ public class ManualFragment extends Fragment {
 
 
 }
+
+
+
+
+
+
+
+
+
+
 
 
 

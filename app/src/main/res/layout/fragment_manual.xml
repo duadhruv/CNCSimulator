@@ -122,8 +122,9 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
+            android:fontFamily="@font/amaranth"
             android:textColor="@android:color/white"
-            android:textSize="70dp"
+            android:textSize="90dp"
             app:layout_constraintBottom_toTopOf="@+id/startcycle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -138,7 +139,9 @@
             android:text="Stop Cycle"
             app:layout_constraintBottom_toBottomOf="@+id/startcycle"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/startcycle" />
+            app:layout_constraintTop_toTopOf="@+id/startcycle"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark"
+            />
 
         <Button
             android:id="@+id/startcycle"
@@ -151,7 +154,8 @@
             android:text="Start Cycle"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark"/>
 
     </android.support.constraint.ConstraintLayout>
 

@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     int oldposn = 0;
@@ -79,5 +80,23 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return false;
+    }
+
+    public void startjob()
+    {
+        Toast.makeText(getApplicationContext(),"job started",Toast.LENGTH_SHORT).show();
+    }
+
+    public void endjob()
+    {
+        Toast.makeText(getApplicationContext(),"job ended",Toast.LENGTH_SHORT).show();
+    }
+    public void startcycle()
+    {
+        Toast.makeText(getApplicationContext(),"cycle started",Toast.LENGTH_SHORT).show();
+    }
+    public void endcycle()
+    {
+        Toast.makeText(getApplicationContext(),"cycle ended",Toast.LENGTH_SHORT).show();
     }
 }
