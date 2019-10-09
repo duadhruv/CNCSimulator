@@ -92,7 +92,10 @@ public class ManualFragment extends Fragment {
             public void onClick(View view) {
                 jobstart.setEnabled(false);
                 jobend.setEnabled(true);
+                startcycle.setVisibility(View.VISIBLE);
+                stopcycle.setVisibility(View.VISIBLE);
                 startcycle.setEnabled(true);
+
                 manualLayout.setBackgroundResource(R.color.startColor);
                 Animation fadeout = AnimationUtils.loadAnimation(getContext(), R.anim.fadeout);
                 Animation fadein = AnimationUtils.loadAnimation(getContext(), R.anim.fadein);
@@ -143,8 +146,8 @@ public class ManualFragment extends Fragment {
                 jobstart.setEnabled(true);
                 startcycle.setEnabled(false);
                 stopcycle.setEnabled(false);
-                startcycle.setOnClickListener(null);
-                stopcycle.setOnClickListener(null);
+                startcycle.setVisibility(View.GONE);
+                stopcycle.setVisibility(View.GONE);
                 manualLayout.setBackgroundResource(R.color.stopColor);
                 Animation fadeout = AnimationUtils.loadAnimation(getContext(), R.anim.fadeout);
                 Animation fadein = AnimationUtils.loadAnimation(getContext(), R.anim.fadein);
