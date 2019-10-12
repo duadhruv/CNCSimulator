@@ -10,4 +10,6 @@
     <color name="naviColor">#DF3C3939</color>
     <color name="naviTextColor">#9C9898</color>
     <color name="naviTextColorChecked">#FFFFFF</color>
+    <color name="txtcolor">#FFFFFF</color>
+
 </resources>
