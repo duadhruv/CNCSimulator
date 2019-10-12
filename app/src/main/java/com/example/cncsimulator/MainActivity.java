@@ -203,7 +203,12 @@ public class MainActivity extends AppCompatActivity {
                         .replace(R.id.frame, fragment).commit();
 
             }
+            if(oldposn==0&& newposn==1)
+            {
+                sendString("end$;");
+            }
             oldposn = newPosition;
+
             return true;
         }
 
@@ -288,7 +293,8 @@ public class MainActivity extends AppCompatActivity {
                     //frameAnimation.stop();
                     btimg.setBackgroundResource(R.drawable.bluetooth_blue);
                     btconnectioncheck();
-                    readInput();
+                    //readInput();
+                    lineRead();
                     //beginRead();
                     //incomingdata();
                 } else {
@@ -365,7 +371,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void sendString(final String string) {
+    public void sendString(final String string) {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -427,7 +433,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                         finally {
                             if(inputStream != null) {
-                                final String data = readUntilChar(inputStream, ';');
+                                final String data = readUntilChar(inputStream, '\n');
                                 Log.d("data", data);
 
                             }
@@ -466,6 +472,70 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return sb.toString();
+    }
+
+
+    public void lineRead()
+    {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (true)
+                {
+                    BufferedReader r = null;
+                    try {
+                        r = new BufferedReader(new InputStreamReader(btservice.getSocket().getInputStream()));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    String x = "";
+                    try {
+                        x = r.readLine();
+                        Log.e("data", x);
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }).start();
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unbindService(btconnection);
+        servicebinded = false;
+    }
+    @Override
+    public void onResume() {
+        //btservice.register();
+        super.onResume();
+        activtypaused = false;
+        if(servicebinded) {
+            // new ConnectBT().execute();
+        }
+    }
+
+    @Override
+    public void onPause() {
+        //btservice.unregister();
+        activtypaused = true;
+        super.onPause();
+    }
+
+    @Override
+    protected void onStop() {
+        try {
+            btservice.unregister();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        super.onStop();
     }
 
 }

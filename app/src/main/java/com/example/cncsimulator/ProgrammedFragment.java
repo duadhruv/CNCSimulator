@@ -1,5 +1,6 @@
 package com.example.cncsimulator;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -121,22 +122,16 @@ public class ProgrammedFragment extends Fragment {
             }
         });
 
-
+        final Activity main = ((MainActivity)getActivity());
         jobstart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 if(true)
                 {
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            ArrayList<Integer> randoms = new ArrayList<>();
-                            randoms = genrateRandoms(noofcycles);
-                        }
-                    }).start();
-
-
+                    String command = cycleno.getText().toString()+","+cttxt.getText().toString()+","+lutxt.getText().toString()+",1;";
+                    ((MainActivity) main).sendString(command);
+                    Log.w("command",command);
                 }
             }
         });
@@ -159,4 +154,9 @@ public class ProgrammedFragment extends Fragment {
        }
        return no;
     }
+
+
+
+
+
 }
