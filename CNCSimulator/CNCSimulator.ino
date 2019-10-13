@@ -73,7 +73,7 @@ void loop() {
     lurunning=false;
     endCycle();
     endJob();
-    delay(5000);
+    delay(2000);
     saveData();
     initData();
     input="";
@@ -123,7 +123,7 @@ void loop() {
     if(!jobrunning&&currcycle==0)
     {
       startJob();
-      delay(5000);
+      delay(2000);
     }
     else{jobrunning=true;}
   
@@ -142,9 +142,9 @@ void loop() {
       {
         currcycle=0;
         saveCurrCycle();
-        delay(5000);
+        delay(2000);
         endJob();
-        delay(5000);
+        delay(2000);
         
       }
     }
