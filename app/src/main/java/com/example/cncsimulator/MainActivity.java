@@ -51,10 +51,20 @@ public class MainActivity extends AppCompatActivity {
     String btselectedname;
     byte[] buffer = new byte[256];
     int bytes;
+    Toolbar toolbar;
 
-
-
-
+    void redToolbar()
+    {
+        toolbar.setBackgroundResource(R.color.stopColor);
+    }
+    void greenToolbar()
+    {
+        toolbar.setBackgroundResource(R.color.startColor);
+    }
+    boolean isBtConneced()
+    {
+        return  btservice.isConnected();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,10 +76,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("CNC Simulator");
-        //toolbar.setBackgroundResource(R.drawable.dbnotconnectedcolor);
+        toolbar.setBackgroundResource(R.color.stopColor);
 
 
         Intent o = new Intent(MainActivity.this,BluetoothService.class);
@@ -203,7 +213,7 @@ public class MainActivity extends AppCompatActivity {
                         .replace(R.id.frame, fragment).commit();
 
             }
-            if(oldposn==0&& newposn==1)
+            if(oldposn==0&& newposn==1&&btservice.isConnected())
             {
                 sendString("end$;");
             }
@@ -367,6 +377,13 @@ public class MainActivity extends AppCompatActivity {
                 editor.putString("btadd", btselectedadd);
                 editor.apply();
                 btservice.refresh();
+            }
+            else if(requestCode==1)
+            {
+                btimg.setBackgroundResource(R.drawable.spin_animation);
+                frameAnimation = (AnimationDrawable) btimg.getBackground();
+                frameAnimation.start();
+                new ConnectBT().execute();
             }
         }
     }

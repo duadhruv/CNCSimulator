@@ -16,6 +16,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.cncsimulator.R;
 
@@ -58,12 +59,15 @@ public class ManualFragment extends Fragment {
         startcycle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((MainActivity) main).startcycle();
-                stopcycle.setEnabled(true);
-                startcycle.setEnabled(false);
-                cycleticker.reset();
-                cycleticker.start();
-                jobend.setEnabled(false);
+
+                    ((MainActivity) main).startcycle();
+                    ((MainActivity) main).greenToolbar();
+                    stopcycle.setEnabled(true);
+                    startcycle.setEnabled(false);
+                    cycleticker.reset();
+                    cycleticker.start();
+                    jobend.setEnabled(false);
+
 
             }
         });
@@ -73,6 +77,7 @@ public class ManualFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 ((MainActivity) main).endcycle();
+                ((MainActivity) main).redToolbar();
                 cyclecount++;
                 count.setText(String.valueOf(cyclecount));
                 stopcycle.setEnabled(false);
@@ -95,13 +100,14 @@ public class ManualFragment extends Fragment {
         jobstart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(((MainActivity) main).isBtConneced()) {
                 ((MainActivity) main).startjob();
                 jobstart.setEnabled(false);
                 jobend.setEnabled(true);
                 startcycle.setVisibility(View.VISIBLE);
                 stopcycle.setVisibility(View.VISIBLE);
                 startcycle.setEnabled(true);
-                cyclecount=0;
+                cyclecount = 0;
                 count.setText(String.valueOf(cyclecount));
 
 
@@ -145,6 +151,10 @@ public class ManualFragment extends Fragment {
                 });
                 jobstartlayout.setAnimation(fadein);
                 jobticker.start();
+            }
+                else {
+                    Toast.makeText(getContext(),"Not Connected",Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

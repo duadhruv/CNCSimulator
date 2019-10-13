@@ -1,6 +1,7 @@
 package com.example.cncsimulator;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -17,6 +18,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Random;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class ProgrammedFragment extends Fragment {
 
     int noofcycles = 0;
@@ -27,6 +30,8 @@ public class ProgrammedFragment extends Fragment {
     int add[] = {0,5,7,0,5,7,0,5,7,0,5,7,0,5,7,0,5,7,0,5,7,0,5,7,0,5,7,0,5,7,0,5,7,0,5,7};
     int cycletimecount=0;
     int lutime = 0;
+    String MY_PREFS_NAME = "mypref";
+
 
     @Nullable
     @Override
@@ -44,11 +49,14 @@ public class ProgrammedFragment extends Fragment {
         lusub = view.findViewById(R.id.lusub);
         lutxt=view.findViewById(R.id.lutxt);
         ctadd= view.findViewById(R.id.ctadd);
-        ctsub=view.findViewById(R.id.lusub);
+        ctsub=view.findViewById(R.id.ctsub);
         cttxt=view.findViewById(R.id.cttxt);
         Ticker jobticker = new Ticker(jobtime);
         Ticker cycleticker = new Ticker(cycletime);
-
+        SharedPreferences prefs = getActivity().getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
+        noofcycles = prefs.getInt("cyclecount", 0);
+        cycletimecount=prefs.getInt("cycletimecount", 0);
+        lutime=prefs.getInt("lutime", 0);
         ctadd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -127,11 +135,17 @@ public class ProgrammedFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                if(true)
+                if(((MainActivity) main).isBtConneced())
                 {
                     String command = cycleno.getText().toString()+","+cttxt.getText().toString()+","+lutxt.getText().toString()+",1;";
                     ((MainActivity) main).sendString(command);
                     Log.w("command",command);
+                    SharedPreferences.Editor editor = getActivity().getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+                    editor.putInt("cyclecount",noofcycles);
+                    editor.putInt("cycletimecount",cycletimecount);
+                    editor.putInt("lutime",lutime);
+
+                    editor.apply();
                 }
             }
         });
