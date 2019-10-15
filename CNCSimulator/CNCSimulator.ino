@@ -173,7 +173,7 @@ void startJob()
   jobrunning=true;
   Serial.println("job started;");
   digitalWrite(jobstartpin,LOW);
-  delay(300);
+  delay(500);
   digitalWrite(jobstartpin,HIGH);
 
 }
@@ -183,7 +183,7 @@ void endJob()
   jobrunning=false;
   Serial.println("job ended;");
   digitalWrite(jobendpin,LOW);
-  delay(300);
+  delay(500);
   digitalWrite(jobendpin,HIGH);
 
 }
