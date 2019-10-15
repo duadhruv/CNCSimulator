@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -57,6 +58,11 @@ public class ProgrammedFragment extends Fragment {
         noofcycles = prefs.getInt("cyclecount", 0);
         cycletimecount=prefs.getInt("cycletimecount", 0);
         lutime=prefs.getInt("lutime", 0);
+        cttxt.setText(String.valueOf(cycletimecount));
+        lutxt.setText(String.valueOf(lutime));
+        cycleno.setText(String.valueOf(noofcycles));
+
+
         ctadd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -146,6 +152,9 @@ public class ProgrammedFragment extends Fragment {
                     editor.putInt("lutime",lutime);
 
                     editor.apply();
+                }
+                else {
+                    Toast.makeText(getContext(),"Not Connected",Toast.LENGTH_SHORT).show();
                 }
             }
         });

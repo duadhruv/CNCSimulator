@@ -61,7 +61,7 @@ public class ManualFragment extends Fragment {
             public void onClick(View view) {
 
                     ((MainActivity) main).startcycle();
-                    ((MainActivity) main).greenToolbar();
+                    //((MainActivity) main).greenToolbar();
                     stopcycle.setEnabled(true);
                     startcycle.setEnabled(false);
                     cycleticker.reset();
@@ -77,7 +77,7 @@ public class ManualFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 ((MainActivity) main).endcycle();
-                ((MainActivity) main).redToolbar();
+                //((MainActivity) main).redToolbar();
                 cyclecount++;
                 count.setText(String.valueOf(cyclecount));
                 stopcycle.setEnabled(false);
@@ -102,6 +102,7 @@ public class ManualFragment extends Fragment {
             public void onClick(View view) {
                 if(((MainActivity) main).isBtConneced()) {
                 ((MainActivity) main).startjob();
+                ((MainActivity) main).greenToolbar();
                 jobstart.setEnabled(false);
                 jobend.setEnabled(true);
                 startcycle.setVisibility(View.VISIBLE);
@@ -162,6 +163,7 @@ public class ManualFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 ((MainActivity) main).endjob();
+                ((MainActivity) main).redToolbar();
                 jobend.setEnabled(false);
                 jobstart.setEnabled(true);
                 startcycle.setEnabled(false);
