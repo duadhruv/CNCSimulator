@@ -31,9 +31,6 @@ public class BluetoothService extends Service {
     public BluetoothService() {
         Log.w("btservice","service started");
 
-
-
-
     }
 
 
